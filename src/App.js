@@ -1,10 +1,22 @@
-import SubmitForm from "./components/SubmitForm";
+import React, { useState } from "react";
 
+import AddUser from "./components/AddUser";
+import UserData from "./components/UserData";
 
 function App() {
+
+  const [userList, setUserList] = useState([]);
+
+  const submitDataHandler = (userName, userAge) => {
+    setUserList((prevUserList) => {
+      return [...prevUserList, {name: userName, age: userAge, id: Math.random().toString()}]
+    });
+  }
+
   return (
     <div>
-      <SubmitForm/>
+      <AddUser OnSubmitData={submitDataHandler}/>
+      <UserData users={userList}/>
     </div>
   );
 }
